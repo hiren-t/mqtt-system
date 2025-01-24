@@ -25,7 +25,7 @@ services:
 
   mqtt-api:
     build:
-      context: ./mqtt-api
+      context: ./mqtt_api
     container_name: mqtt_api
     depends_on:
       - mqtt_client
