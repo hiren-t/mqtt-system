@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt_broker
+    ports:
+      - "1883:1883"        # MQTT protocol port
+      - "9001:9001"        # WebSocket port (optional for debugging)
+    volumes:
+      - mosquitto_config:/mosquitto/config
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    restart: unless-stopped
+
+  mqtt-client:
+    build:
+      context: ./mqtt-client
+    container_name: mqtt_client
+    depends_on:
+      - mosquitto
+    environment:
+      - MQTT_BROKER_HOST=mosquitto
+      - MQTT_BROKER_PORT=1883
+    restart: unless-stopped
+
+  mqtt-api:
+    build:
+      context: ./mqtt-api
+    container_name: mqtt_api
+    depends_on:
+      - mqtt-client
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+volumes:
+  mosquitto_config:
+  mosquitto_data:
+  mosquitto_logs:
