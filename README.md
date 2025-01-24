@@ -52,7 +52,7 @@ All components are orchestrated using Docker Compose to simplify deployment.
 
 **1. Clone the repository:**
 
-        git clone <repository_url>
+        git clone https://github.com/hiren-t/mqtt-system.git
         cd mqtt_system
 
 **2. **Build and start the services:****
