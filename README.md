@@ -45,8 +45,8 @@ All components are orchestrated using Docker Compose to simplify deployment.
   <br>
   
 **Prerequisites**
- - Docker: Install Docker
- - Docker Compose: Install Docker Compose
+ - Docker: Install [Docker](https://www.docker.com/)
+ - Docker Compose: [Install Docker Compose](https://docs.docker.com/compose/)
 
 ## **Step-by-Step Setup**
 
