@@ -15,7 +15,7 @@ services:
 
   mqtt-client:
     build:
-      context: ./mqtt-client
+      context: ./mqtt_client
     container_name: mqtt_client
     depends_on:
       - mosquitto
@@ -29,7 +29,7 @@ services:
       context: ./mqtt-api
     container_name: mqtt_api
     depends_on:
-      - mqtt-client
+      - mqtt_client
     ports:
       - "8000:8000"
     restart: unless-stopped
