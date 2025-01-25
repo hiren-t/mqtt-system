@@ -5,7 +5,7 @@ services:
     image: eclipse-mosquitto:latest
     container_name: mqtt_broker
     ports:
-      - "1883:1883"        # MQTT protocol port
+      - "1883:1883"
     volumes:
       - mosquitto_config:/mosquitto/config
       - mosquitto_data:/mosquitto/data
@@ -31,7 +31,7 @@ services:
       mosquitto:
         condition: service_healthy
     environment:
-      - MQTT_BROKER_HOST=mqtt_broker
+      - MQTT_BROKER_HOST=mosquitto
       - MQTT_BROKER_PORT=1883
     restart: unless-stopped
     logging:
