@@ -52,9 +52,11 @@ All components are orchestrated using Docker Compose to simplify deployment.
 
 **1. Clone the repository:**
 
-  ```git clone https://github.com/hiren-t/mqtt-system.git```
+    git clone https://github.com/hiren-t/mqtt-system.git
+
+Change the current directory to the folder named ```mqtt_system```
         
-  ```cd mqtt_system```
+    cd mqtt_system
 
 **2. **Build and start the services:****
      Docker Compose will automatically build and start the Mosquitto broker, MQTT client, and FastAPI service.
