@@ -72,10 +72,12 @@ Run the following command in the root directory of the project:
 
 **3. Verify the services:** 
     After the containers are up, check the logs for each container to verify the services are running:
-
-    docker logs -f mqtt_broker
-    docker logs -f mqtt_client
-    docker logs -f mqtt_api
+     - To check MQTT Broker Logs:
+    ```docker logs -f mqtt_broker```
+     - To check MQTT Client Logs:
+    ```docker logs -f mqtt_client```
+     - To check API logs:
+    ```docker logs -f mqtt_api```
 
 **4. Access the REST API:**
 
