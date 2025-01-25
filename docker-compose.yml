@@ -11,27 +11,55 @@ services:
       - mosquitto_data:/mosquitto/data
       - mosquitto_logs:/mosquitto/log
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "1883"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   mqtt_client:
     build:
       context: ./mqtt_client
+      dockerfile: Dockerfile
     container_name: mqtt_client
     depends_on:
-      - mosquitto
+      mosquitto:
+        condition: service_healthy
     environment:
-      - MQTT_BROKER_HOST=mosquitto
+      - MQTT_BROKER_HOST=mqtt_broker
       - MQTT_BROKER_PORT=1883
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   mqtt_api:
     build:
       context: ./mqtt_api
+      dockerfile: Dockerfile
     container_name: mqtt_api
     depends_on:
-      - mqtt_client
+      mqtt_client:
+        condition: service_started
     ports:
       - "8000:8000"
+    environment:
+      - API_PORT=8000
+      - CLIENT_SERVICE_HOST=mqtt_client
+      - CLIENT_SERVICE_PORT=1883
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   mosquitto_config:
